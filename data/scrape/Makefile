@@ -1,13 +1,7 @@
-.PHONY: build start stop
+.PHONY: build run
 
 build:
 	docker-compose build
 
 run: build
 	docker-compose run bot
-
-# start:
-# 	cd docker && docker-compose up
-
-# stop:
-# 	cd docker && docker-compose down
