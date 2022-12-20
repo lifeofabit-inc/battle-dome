@@ -22,7 +22,7 @@ new-feature:
 	open https://github.com/${GITHUB_TEAM}/${REPO_NAME}/compare/develop...feature/${name}\?title\=Feature:+${name}\&labels\=enhancement
 
 new-hotfix:
-# Ex: make hotfix name=fix-stuff
+# Ex: make new-hotfix name=fix-stuff
 	git checkout main
 	git pull origin main
 	git checkout -b hotfix/${name} main
