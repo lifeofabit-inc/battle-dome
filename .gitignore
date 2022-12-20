@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # battle-dome ignores
-data/scrape/scrapebot/../*.json
+data/scrape/**/*.json
+data/scrape/**/*.jsonl
