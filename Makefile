@@ -1,4 +1,4 @@
-.PHONY: list new-feature new-hotfix delete-branch
+.PHONY: list new-feature new-hotfix delete-branch run-jupyter
 
 GITHUB_TEAM := lifeofabit-inc
 REPO_NAME := battle-dome
@@ -47,3 +47,7 @@ delete-branch:
 	git checkout develop
 	git push origin --delete ${name}
 	git branch -D ${name}
+
+run-jupyter:
+	docker build -t lifeofabit/jupyter-notebook analysis/
+	docker run -p 8888:8888 -v ${PWD}/analysis:/home/jovyan/work/analysis -v ${PWD}/data:/home/jovyan/work/data lifeofabit/jupyter-notebook
