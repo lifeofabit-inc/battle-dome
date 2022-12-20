@@ -1,18 +1,19 @@
-.PHONY: all feature
+.PHONY: list new-feature new-hotfix delete-branch
 
-GITHUB_TEAM := loab-revolt
+GITHUB_TEAM := lifeofabit-inc
 REPO_NAME := battle-dome
 
 
-all:
+list:
 	@echo "Available commands: \n \
-		*  \n \
+		*  new-feature\n \
+		*  new-hotfix\n \
+		*  delete-branch\n \
 "
 
-feature:
-# Ex: make feature name=cool-stuff
+new-feature:
+# Ex: make new-feature name=cool-stuff
 # TODO - Integrate hub package for PR?
-# TODO - Query parameters?
 	git checkout develop
 	git pull origin develop
 	git checkout -b feature/${name} develop
@@ -20,7 +21,7 @@ feature:
 	git push origin feature/${name}
 	open https://github.com/${GITHUB_TEAM}/${REPO_NAME}/compare/develop...feature/${name}\?title\=Feature:+${name}\&labels\=enhancement
 
-hotfix:
+new-hotfix:
 # Ex: make hotfix name=fix-stuff
 	git checkout main
 	git pull origin main
@@ -29,20 +30,20 @@ hotfix:
 	git push origin hotfix/${name}
 	open https://github.com/${GITHUB_TEAM}/${REPO_NAME}/compare/main...hotfix/${name}\?title\=Hotfix:+${name}\&labels\=bug
 
+merge-feature:
+# Ex: make merge-feature name=cool-stuff
+	git checkout develop
+	git pull origin develop
+	git checkout feature/${name}
+	git pull origin feature/${name}
+	git merge develop 
+# TODO - Magic happens here 
+# git merge --squash feat-fuu-backup && git push -f -u origin feat-fuu (https://gist.github.com/aortbals/2aeb557bf127dd7ae88ea63da93479fc)
+# curl -X PUT -H "Authorization: token ${adminToken}" --data '{"merge_method":"squash"}' https://github.<>.com/api/v3/repos/:org/:repo/pulls/${PR_ID}/merge 
+# TODO - DELETE THE FEATURE BRANCH
 
 delete-branch:
 # Ex: make delete-branch name=feature/cool-stuff
 	git checkout develop
 	git push origin --delete ${name}
 	git branch -D ${name}
-
-
-
-
-
-
-# push_dag:
-# # Pushes a DAG file to the MWAA dagbag
-# # Ex: make push_dag stack_env=dev dag_file=segment_dag.py
-# 	aws s3 cp dags/${dag_file} s3://${AIRFLOW_BUCKET}/dags/
-# 	@echo "Pushed ${dag_file} to S3 bucket ${AIRFLOW_BUCKET}"
