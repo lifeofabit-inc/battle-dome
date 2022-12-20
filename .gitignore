@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# battle-dome ignores
+data/scrape/**/*.json
+data/scrape/**/*.jsonl
+data/scrape/**/*.csv
