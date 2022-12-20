@@ -131,3 +131,4 @@ dmypy.json
 # battle-dome ignores
 data/scrape/**/*.json
 data/scrape/**/*.jsonl
+data/scrape/**/*.csv
